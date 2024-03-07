@@ -1,0 +1,6 @@
+.App{ 
+  padding: 20px;
+  min-height: calc(100vh - 40px);
+  background-color: rgb(43, 43, 43);
+  font-family: 'Courier New', Courier, monospace;
+}

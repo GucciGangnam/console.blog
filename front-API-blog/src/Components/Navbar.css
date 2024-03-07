@@ -1,0 +1,39 @@
+.Navbar {
+    outline: 1px solid white;
+    /* Dimentions */
+    padding: 20px;
+    /* Display */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*Styles */
+    color: white;
+
+    /* White border */
+    border-radius: 10px;
+    /* Glow effect */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.50);
+
+}
+
+.Logo {
+    outline: 1px dashed pink;
+
+}
+
+.Nav-Header {
+    outline: 1px dashed pink;
+
+}
+
+.Nav-Btn-Container {
+    outline: 1px dashed pink;
+    display: flex;
+    gap: 5px;
+}
+
+.Nav-Btn {
+
+}
+.Nav-Btn:hover {
+    }

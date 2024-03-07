@@ -1,0 +1,52 @@
+.Homepage {
+    color: white;
+}
+
+/* LOADING SCREEN */
+
+
+
+.Homepage-post-container {
+    /* Display */
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Styles */
+}
+
+.PostCard {
+    border: 1px solid white;
+    border-radius: 10px;
+    min-width: 240px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+.PostInfo p {
+    margin: 0; /* Set margin to zero */
+}
+
+.PostTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: larger;
+    flex: 9;
+}
+
+.PostInfo {
+    flex: 9;
+}
+
+.Post-Btn-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.Post-Btn{ 
+
+}
