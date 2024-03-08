@@ -1,5 +1,5 @@
 .Navbar {
-    outline: 1px solid white;
+
     /* Dimentions */
     padding: 20px;
     /* Display */
@@ -10,30 +10,23 @@
     color: white;
 
     /* White border */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    ;
     border-radius: 10px;
     /* Glow effect */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.50);
 
 }
 
-.Logo {
-    outline: 1px dashed pink;
+.Logo {}
 
-}
-
-.Nav-Header {
-    outline: 1px dashed pink;
-
-}
+.Nav-Header {}
 
 .Nav-Btn-Container {
-    outline: 1px dashed pink;
     display: flex;
     gap: 5px;
 }
 
-.Nav-Btn {
+.Nav-Btn {}
 
-}
-.Nav-Btn:hover {
-    }
+.Nav-Btn:hover {}

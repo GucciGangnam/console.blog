@@ -3,8 +3,110 @@
 }
 
 /* LOADING SCREEN */
+.Post-loading-container {
+    width: 100%;
+}
 
+/* LOADING Dots */
+@keyframes showDots {
+    0% {
+        opacity: 0;
+    }
 
+    20% {
+        opacity: 1;
+    }
+}
+
+.Loading-dots {
+    animation: showDots 0.25s ease-in-out forwards infinite;
+    opacity: 0;
+}
+
+.Loading-dots-1 {
+    animation-delay: 0.05s;
+}
+
+.Loading-dots-2 {
+    animation-delay: 0.1s;
+}
+
+.Loading-dots-3 {
+    animation-delay: 0.15s;
+}
+
+.Loading-dots-4 {
+    animation-delay: 0.2s;
+}
+
+.Loading-dots-5 {
+    animation-delay: 0.25s;
+}
+
+/* LOADING Steps */
+@keyframes showSteps {
+    0% {
+        opacity: 0;
+        
+    }
+    99% { 
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        
+    }
+}
+
+.Loading-step {
+    animation: showSteps 0.5s ease-in-out forwards;
+    opacity: 0;
+}
+.Post-Loading-Error{ 
+    animation: showSteps 0.5s ease-in-out forwards;
+    opacity: 0;
+}
+
+.Loading-step:nth-child(1) {
+    margin: 0;
+    animation-delay: 0.0s;
+}
+.Loading-step:nth-child(2) {
+    margin: 0;
+    animation-delay: 0.2s;
+}
+.Loading-step:nth-child(3) {
+    margin: 0;
+    animation-delay: 0.6s;
+}
+.Loading-step:nth-child(4) {
+    margin: 0;
+    animation-delay: 0.65s;
+}
+.Loading-step:nth-child(5) {
+    margin: 0;
+    animation-delay: 0.65s;
+}
+.Loading-step:nth-child(6) {
+    margin: 0;
+    animation-delay: 0.7s;
+}
+.Loading-step:nth-child(7) {
+    margin: 0;
+    animation-delay: 0.7s;
+}
+.Loading-step:nth-child(8) {
+    margin: 0;
+    animation-delay: 0.9s;
+}
+.Loading-step:nth-child(8) {
+    margin: 0;
+    animation-delay: 0.9s;
+}
+.Post-Loading-Error{ 
+    color: red;
+    animation-delay: 1s;
+}
 
 .Homepage-post-container {
     /* Display */
@@ -19,16 +121,22 @@
     border: 1px solid white;
     border-radius: 10px;
     min-width: 240px;
+    max-width: 240px;
     min-height: 240px;
     display: flex;
     flex-direction: column;
     padding: 30px;
 }
+
 .PostInfo p {
-    margin: 0; /* Set margin to zero */
+    margin: 0;
+    /* Set margin to zero */
 }
 
 .PostTitle {
+    
+    max-width: 100%;
+    overflow: scroll;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,6 +155,5 @@
     align-items: center;
     justify-content: flex-end;
 }
-.Post-Btn{ 
 
-}
+.Post-Btn {}

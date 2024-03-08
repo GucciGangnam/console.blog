@@ -1,16 +1,18 @@
 //IMPORTS
 // React 
-
+// RRD
+import { Link, useNavigate } from "react-router-dom";
 // Styles 
 import './Navbar.css'
 
 
 // COMPONENT 
 export const Navbar = () => {
+    const navigate = useNavigate();
     return (
         <div className='Navbar'>
             <div className='Logo'>
-                Logo here
+                <Link to={"/"}>Logo Here</Link>
             </div>
 
             <div className='Nav-Header'>
@@ -18,7 +20,7 @@ export const Navbar = () => {
             </div>
 
             <div className='Nav-Btn-Container'>
-                <button className='Nav-Btn'>Button 1</button>
+                <button className='Nav-Btn' onClick={() => {navigate(`/signup`)}}>Sign up</button>
                 <button className='Nav-Btn'>Button 2</button>
             </div>
         </div>

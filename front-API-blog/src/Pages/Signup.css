@@ -1,0 +1,35 @@
+.Signup {
+    color: white;
+}
+
+.Signup-object-grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* Left column sizes to content, right column fills remaining space */
+    gap: 5px;
+    /* Adjust gap as needed */
+}
+
+.Signup-object-grid-container>* {
+    /* Add borders to all grid items */
+    /* border: 1px solid pink; */
+    /* Add borders to all grid ite
+    padding: 10px; /* Optional: Add padding to improve spacing */
+}
+
+.Signup-Input{ 
+    background: none;
+    color: white;
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+}
+.Signup-Input:invalid{ 
+    color: red;
+}
+.Signup-Input:focus{ 
+    outline: none;
+}
+.passwords-not-match{ 
+    color: red;
+}

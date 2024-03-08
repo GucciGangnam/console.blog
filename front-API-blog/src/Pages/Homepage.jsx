@@ -1,24 +1,29 @@
 // IMPORTS 
 // React 
 import { useState, useEffect } from "react";
+// Import Links 
+import { Link, useNavigate } from "react-router-dom";
 
 // Styles 
 import "./Homepage.css"
 
 // COMPONENT // 
 export const Homepage = () => {
+    const navigate = useNavigate();
     const [allPosts, setAllPosts] = useState({});
     const [loadingData, setLoadingData] = useState(true);
     const [error, setError] = useState(null);
 
-    // Butoon handlers 
-    // UE to run fetchData on mount
+    // Button handlers 
+
     const handleReadPost = (postID) => {
-        console.log("Read Post Clicked - PostID: " + postID)
+        navigate(`/blogpost/${postID}`);
     }
+    // UE to run fetchData on mount
     useEffect(() => {
         fetchData();
     }, []);
+
     // FN to fetchdata
     const fetchData = async () => {
         try {
@@ -40,8 +45,7 @@ export const Homepage = () => {
             }, 2000);
         } catch (error) {
             console.error('Error fetching data:', error.message);
-            setError(error.message);
-            setLoadingData(false);
+            setError("Error connecting to database");
         }
     };
 
@@ -60,7 +64,27 @@ export const Homepage = () => {
             <h1 className="Posts-Header">{'{Posts}'}</h1>
             <div className="Homepage-post-container">
                 {loadingData ? (
-                    <div className="PostTitle">Loading post</div>
+                    <div className="Post-loading-container">
+                        Loading post
+                        <span className="Loading-dots Loading-dots-1">.</span>
+                        <span className="Loading-dots Loading-dots-2">.</span>
+                        <span className="Loading-dots Loading-dots-3">.</span>
+                        <span className="Loading-dots Loading-dots-4">.</span>
+                        <span className="Loading-dots Loading-dots-5">.</span>
+
+                        <div className="Loading-steps">
+                            <p className="Loading-step">Fetching data</p>
+                            <p className="Loading-step">Awaiting response</p>
+                            <p className="Loading-step">Response to JSON</p>
+                            <p className="Loading-step">Setting titles</p>
+                            <p className="Loading-step">Setting authors</p>
+                            <p className="Loading-step">Setting dates</p>
+                            <p className="Loading-step">Counting words</p>
+                            <p className="Loading-step">Finishing</p>
+                            {error && <p className="Post-Loading-Error">Error: {error}</p>}
+                        </div>
+
+                    </div>
                 ) : error ? (
                     <p>Error: {error}</p>
                 ) : allPosts.allPostsFromAPI[0] ? (
