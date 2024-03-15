@@ -1,0 +1,43 @@
+.NewcommentContainer{ 
+    background-color: rgba(0, 0, 0, 0.88);
+    position: absolute;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Newcommewnt-form{ 
+    outline: 1px dashed pink;
+    background-color: grey;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.Newcomment-textinput{ 
+    min-width: 500px;
+    min-height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    align-items: flex-start; /* Align text to the top */
+    overflow-wrap: break-word;
+    display: block;
+
+}
+
+.CommentBoxButtons{ 
+    padding-top: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}

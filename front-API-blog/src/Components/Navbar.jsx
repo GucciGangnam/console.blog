@@ -7,7 +7,7 @@ import './Navbar.css'
 
 
 // COMPONENT 
-export const Navbar = () => {
+export const Navbar = ({ userAccessToken, loggedinUser }) => {
     const navigate = useNavigate();
     return (
         <div className='Navbar'>
@@ -20,8 +20,18 @@ export const Navbar = () => {
             </div>
 
             <div className='Nav-Btn-Container'>
-                <button className='Nav-Btn' onClick={() => {navigate(`/signup`)}}>Sign up</button>
-                <button className='Nav-Btn'>Button 2</button>
+                {!loggedinUser.username ? (
+                    <>
+                        
+                        <button className='Nav-Btn' onClick={() => { navigate(`/signup`) }}>Sign up</button>
+                        <button className='Nav-Btn' onClick={() => { navigate(`/login`) }}>Log in</button>
+                    </>
+                ) : (
+                    <>
+                    <button className='Nav-Btn' onClick={() => { navigate(`/newpost`) }}>Create</button>
+                    <button className='Nav-Btn' onClick={() => { navigate(`/account`) }}>Account</button>
+                    </>
+                )}
             </div>
         </div>
     )

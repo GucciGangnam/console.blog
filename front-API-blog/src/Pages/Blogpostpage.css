@@ -1,14 +1,25 @@
-.Blogpostpage{ 
+.Blogpostpage {
     color: white;
 }
 
 .Object-grid-container {
     display: grid;
-    grid-template-columns: auto 1fr; /* Left column sizes to content, right column fills remaining space */
-    gap: 5px; /* Adjust gap as needed */
+    grid-template-columns: auto 1fr;
+    /* Left column sizes to content, right column fills remaining space */
+    gap: 5px;
+    /* Adjust gap as needed */
 }
 
-.Object-grid-container > * {
-   /* Add borders to all grid items */
-    padding: 10px; /* Optional: Add padding to improve spacing */
+.Object-grid-container>* {
+    /* Add borders to all grid items */
+    padding: 10px;
+    /* Optional: Add padding to improve spacing */
+}
+
+.Comment-Object-grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* Two columns: auto (fit to content) and 1fr (fill remaining space) */
+    gap: 10px;
+    /* Adjust gap between columns if needed */
 }

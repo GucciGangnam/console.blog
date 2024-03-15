@@ -65,7 +65,7 @@ export const Homepage = () => {
             <div className="Homepage-post-container">
                 {loadingData ? (
                     <div className="Post-loading-container">
-                        Loading post
+                        Loading posts
                         <span className="Loading-dots Loading-dots-1">.</span>
                         <span className="Loading-dots Loading-dots-2">.</span>
                         <span className="Loading-dots Loading-dots-3">.</span>
