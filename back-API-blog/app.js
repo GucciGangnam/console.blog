@@ -35,7 +35,7 @@ async function main() {
 }
 // CORS setup
 const corsOptions = {
-  origin: 'http://localhost:5173', // Allowed origin
+  origin: '*', // Allowed origin
   allowedHeaders: ['Authorization', 'Content-Type'], // Allowed headers
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
   credentials: true, // Allow cookies or other credentials to be included in CORS requests

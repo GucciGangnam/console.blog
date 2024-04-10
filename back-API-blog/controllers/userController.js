@@ -16,39 +16,21 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require("jsonwebtoken");
 
 // User Controller functions // 
-
 exports.create_user = [
     // validate and sanitize
     body("username")
         .trim()
-        .isLength({ min: 3, max: 25 }).withMessage('Nice try but the username must be between 3 and 25 characters long')
+        .isLength({ min: 3, max: 15 }).withMessage('Nice try but the username must be between 3 and 15 characters long')
         .custom(value => {
             if (!/^[a-zA-Z0-9]+$/.test(value)) {
                 throw new Error("Nice try but the username can only contain letters and numbers");
             }
             return true;
         }),
-    body("firstname")
-        .trim()
-        .isLength({ min: 3, max: 25 }).withMessage("Nice try but the firstname must be between 3 and 25 characters long")
-        .custom(value => {
-            if (!/^[a-zA-Z0-9]+$/.test(value)) {
-                throw new Error("Nice try but the firstname can only contain letters and numbers");
-            }
-            return true;
-        }),
-    body("lastname")
-        .trim()
-        .isLength({ min: 3, max: 25 }).withMessage("Nice try but the lastname must be between 3 and 25 characters long")
-        .custom(value => {
-            if (!/^[a-zA-Z0-9]+$/.test(value)) {
-                throw new Error("Nice try but the lastname can only contain letters and numbers");
-            }
-            return true;
-        }),
     body("email")
         .trim()
         .isEmail()
+        .toLowerCase()
         .withMessage('Invalid email address'),
     body("password")
         .isLength({ min: 8 })
@@ -62,13 +44,14 @@ exports.create_user = [
         // Check is any errors were thown from validation
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log(errors)
             return res.status(400).json({ msg: errors })
         }
-        const { firstname, lastname, email, username, password } = req.body;
+        const { email, username, password } = req.body;
         // check username doesnmt already exist // README: THIS THROWS A 409 ERROR SO FRONTEND CAN HANDLE THIS SPESIFICALLY (DISPLAY TO USER)
-        const existingUser = await Users.findOne({ USERNAME: username })
+        const existingUser = await Users.findOne({ $or: [{ USERNAME: username }, { USERNAME: { $regex: new RegExp('^' + username + '$', 'i') } }] });
         if (existingUser) {
-            return res.status(409).json({ msg: "This username is already taken" })
+            return res.status(409).json({ msg: "This username is already taken" });
         }
         // check email doesnt already exist // README: THIS THROWS A 409 ERROR SO FRONTEND CAN HANDLE THIS SPESIFICALLY (DISPLAY TO USER)
         const existingEmail = await Users.findOne({ EMAIL: email })
@@ -86,22 +69,10 @@ exports.create_user = [
             USERNAME: username,
             PASSWORD: hashedPassword,
             EMAIL: email,
-            FIRST_NAME: firstname,
-            LAST_NAME: lastname,
             IP_ADDRESSES: [ipAddress]
         })
         newUser.save();
-
-        //////// THIS IS A JWT TEST  DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME ///
-        const payload = {
-            userId: newUserID
-        }
-        const secretKey = process.env.API_SECURITY_KEY;
-        const accessToken = jwt.sign(payload, secretKey);
-        console.log(accessToken)
-        //////// THIS IS A JWT TEST  DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME ///
-
-        return res.status(200).json({ MSG: "User Created" })
+        return res.status(200).json({ msg: "User Created" })
     })
 ]
 // Get user Info
@@ -119,7 +90,7 @@ exports.read_user = asyncHandler(async (req, res, next) => {
         return res.status(200).json({ publicUserInfo })
     } catch (err) {
         console.error(err)
-        return res.status(500).json({msg: "Database error" })
+        return res.status(500).json({ msg: "Database error" })
     }
 })
 // Update user profile fiels individually
@@ -234,7 +205,6 @@ exports.update_user_password = [
         res.status(200).json({ MSG: "User password Updated" })
     })
 ]
-
 // Delete User //
 exports.delete_user = asyncHandler(async (req, res, next) => {
     // REQUIREMENTS - Valid User Access Token 
@@ -246,4 +216,32 @@ exports.delete_user = asyncHandler(async (req, res, next) => {
         console.error(err)
         res.status(500).json({ msg: "Database Error" })
     }
+})
+
+// Login User // 
+exports.login_user = asyncHandler(async (req, res, next) => {
+    // Require req.body.username - req.body.password
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // Does user exisit? 
+    const existingUser = await Users.findOne({ $or: [{ USERNAME: username }, { USERNAME: { $regex: new RegExp('^' + username + '$', 'i') } }] });
+    if (!existingUser) {
+        return res.status(400).json({ msg: "Username / password combo not found" });
+    }
+    // Compare passwords
+    const passwordMatch = await bcrypt.compare(password, existingUser.PASSWORD);
+    if (!passwordMatch) {
+        return res.status(400).json({ msg: "Username / password combo not found" });
+    }
+    //////// THIS IS A JWT TEST  DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME ///
+    const payload = {
+        username: existingUser.USERNAME,
+        userId: existingUser.ID,
+    }
+    const secretKey = process.env.API_SECURITY_KEY;
+    const accessToken = jwt.sign(payload, secretKey, { expiresIn: '60m' })
+    console.log(accessToken)
+    //////// THIS IS A JWT TEST  DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME DELETE ME ///
+    return res.status(200).json({ accessToken: accessToken })
 })

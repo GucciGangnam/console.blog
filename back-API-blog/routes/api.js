@@ -24,20 +24,25 @@ router.put('/user/email', authorization_controller.validateAccessToken,  user_co
 router.put('/user/password', authorization_controller.validateAccessToken,  user_controller.update_user_password)
 // Delete user 
 router.delete('/user', authorization_controller.validateAccessToken, user_controller.delete_user)
+// Login User // 
+router.post('/user/login', user_controller.login_user)
 
 // POSTS // 
 // Create post 
 router.post('/post', authorization_controller.validateAccessToken, post_controller.create_post)
-// Read post 
-router.get('/post', post_controller.get_post)
 // Read all posts
 router.get('/post/all', post_controller.get_all_post)
+// Read post 
+router.get('/post/:id', post_controller.get_post)
 // Update post 
 router.put('/post', authorization_controller.validateAccessToken, post_controller.update_post)
 // Delete Post 
 router.delete('/post', authorization_controller.validateAccessToken, post_controller.delete_post)
+// Like post 
+router.post('/post/like/:id', authorization_controller.validateAccessToken, post_controller.like_post)
 // COMMENTS // 
 // Create comment 
+router.post('/post/comment/:id', authorization_controller.validateAccessToken, comment_controller.post_comment)
 
 // Read Comment
 

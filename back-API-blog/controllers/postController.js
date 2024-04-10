@@ -15,6 +15,9 @@ exports.create_post = asyncHandler(async (req, res, next) => {
     try {
         const title = req.body.title
         const body = req.body.body
+        if (title.length > 50) {
+            return res.status(400).json({ msg: "nice try but title can't bve more than 50 chars" })
+        }
         // get user from user id (send by auth midW)
         const userID = req.userId
         console.log('user id is:' + userID)
@@ -26,6 +29,7 @@ exports.create_post = asyncHandler(async (req, res, next) => {
             AUTHOR_USERNAME: user.USERNAME,
             AUTHOR_ID: user.ID,
             TIMESTAMP: new Date(),
+            WORDS: body.split(/\s+/).filter(word => word !== '').length
         })
         newPost.save();
         return res.status(200).json({ msg: 'Post created succesfully' })
@@ -35,18 +39,16 @@ exports.create_post = asyncHandler(async (req, res, next) => {
     }
 });
 
-// GET spesific post //
+// GET specific post //
 exports.get_post = asyncHandler(async (req, res, next) => {
-    // REQUIREMENTS - body.postID
+    // REQUIREMENTS - URL parameter 'id'
     try {
-        const postID = req.body.postID;
+        const postID = req.params.id;
         const post = await Posts.findOne({ ID: postID });
         if (!post) {
             return res.status(404).json({ msg: "Post not found" })
-
         }
         return res.status(200).json({ post });
-
     } catch (err) {
         console.error(err)
         return res.status(500)
@@ -69,8 +71,10 @@ exports.delete_post = asyncHandler(async (req, res, next) => {
     // REQUIREMENTS - body.postID
     try {
         const postID = req.body.postID;
+        console.log(postID)
         const postToDelete = await Posts.findOne({ ID: postID });
         const userID = req.userId;
+        console.log(userID)
         if (userID === postToDelete.AUTHOR_ID) {
             await Posts.deleteOne({ ID: postID });
             res.status(200).json({ msg: 'Post deleted' })
@@ -106,3 +110,35 @@ exports.update_post = asyncHandler(async (req, res, next) => {
         return res.status(500).json({ msg: "Couldn't Update post" })
     }
 });
+
+// Like post //
+exports.like_post = asyncHandler(async (req, res, next) => {
+    // REQUIRES - user ID (passed from authentification MW) 
+    const postID = req.params.id;
+    const userID = req.userId; // Assuming you are properly getting the user ID from the request
+    // Find the post by ID 
+    const post = await Posts.findOne({ ID: postID });
+    // Check if the post exists
+    if (!post) {
+        return res.status(404).json({ msg: 'Post not found' });
+    }
+    // Check if the user has already liked the post
+    if (post.LIKES.includes(userID)) {
+        // User already liked the post, remove the like
+        const updatedLikes = post.LIKES.filter(id => id !== userID);
+        // Update the post object with the updated likes
+        post.LIKES = updatedLikes;
+        // Save or update the post object in your database
+        await post.save(); // Assuming 'post' is a Mongoose model instance
+        console.log('disliked post'); // Corrected typo in console log
+        return res.status(200).json({ msg: 'Like removed successfully'});
+    } else {
+        // Update the post to add the user's like
+        post.LIKES.push(userID);
+        await post.save();
+        console.log('liked post'); // Corrected typo in console log
+        return res.status(200).json({ msg: 'Post liked' });
+    }
+});
+
+

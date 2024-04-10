@@ -8,11 +8,12 @@ exports.validateAccessToken = asyncHandler(async (req, res, next) => {
     const clientAccessToken = req.headers.authorization
     // if it fails 
     if (!clientAccessToken || !clientAccessToken.startsWith('Bearer ')) {
-        // If the authorization token is missing or invalid, return a 401 Unauthorized response
-        return res.status(401).json({ message: 'Unauthorized Access Token' });
+        // If the authorization token is missing or doesnt start with "bearer", return a 401 Unauthorized response
+        return res.status(401).json({ msg: 'Token missing opr not formatted correctly' });
     }
     // Extract the token part from the Authorization header
     const token = clientAccessToken.split(' ')[1];
+    console.log(token)
     try {
         // Verify the token
         const secretKey = process.env.API_SECURITY_KEY;
@@ -25,6 +26,9 @@ exports.validateAccessToken = asyncHandler(async (req, res, next) => {
         next();
     } catch (error) {
         // If the token is invalid or expired, return a 401 Unauthorized response
-        return res.status(401).json({ message: 'Unauthorized Access Token' });
+        console.log('Authrnification FAILED!!!!')
+        console.error(error)
+        return res.status(401).json({ msg: 'Unauthorized Access Token' });
     }
 })
+

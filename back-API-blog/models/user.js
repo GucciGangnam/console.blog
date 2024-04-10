@@ -20,11 +20,11 @@ const usersSchema = new Schema({
     },
     FIRST_NAME: {
         type: String,
-        required: true,
+        required: false,
     },
     LAST_NAME: {
         type: String,
-        required: true,
+        required: false,
     },
     POSTS: {
         type: Array,

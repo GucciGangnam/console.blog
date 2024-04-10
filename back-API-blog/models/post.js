@@ -33,6 +33,10 @@ const postsSchema = new Schema({
     COMMENTS: {
         type: Array,
         required: false
+    },
+    WORDS: {
+        type: Number,
+        required: true
     }
 }, { collection: 'Posts' }); // Specify the collection name here
 
