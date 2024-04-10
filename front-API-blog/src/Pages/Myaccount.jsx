@@ -41,7 +41,7 @@ export const Myaccount = ({ userAccessToken, loggedinUser, setLoggedinUser, setU
                     'Authorization': 'Bearer ' + userAccessToken
                 }
             };
-            const response = await fetch(`http://localhost:3000/api/user`, requestOptions)
+            const response = await fetch(`https://consoleblog.adaptable.app/api/user`, requestOptions)
             if (!response.ok) {
                 const responseData = await response.json();
                 setTimeout(() => {

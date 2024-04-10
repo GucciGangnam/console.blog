@@ -45,7 +45,7 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
                 }
             };
             // Fetch 
-            const response = await fetch(`http://localhost:3000/api/post/${postID}`, requestOptions)
+            const response = await fetch(`https://consoleblog.adaptable.app/api/post/${postID}`, requestOptions)
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -75,7 +75,7 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
                     'Authorization': 'Bearer ' + userAccessToken
                 }
             };
-            const response = await fetch(`http://localhost:3000/api/post/like/${id}`, requestOptions);
+            const response = await fetch(`https://consoleblog.adaptable.app/api/post/like/${id}`, requestOptions);
             if (!response.ok) {
                 alert("you must log in to like a post")
                 throw new Error('Failed to like/unlike the post');
@@ -108,7 +108,7 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
             body: JSON.stringify({ postID: post.post.ID })
         };
         try {
-            const response = await fetch('http://localhost:3000/api/post', requestOptions)
+            const response = await fetch('https://consoleblog.adaptable.app/api/post', requestOptions)
             const responseJson = await response.json();
             if (response.ok) {
                 console.log(responseJson.msg)

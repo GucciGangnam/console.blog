@@ -23,7 +23,7 @@ export const Newcomment = ({ userAccessToken, setShowCommentBox, id }) => {
             },
             body: JSON.stringify({ comment: message })
         };
-        const response = await fetch(`http://localhost:3000/api/post/comment/${id}`, requestOptions)
+        const response = await fetch(`https://consoleblog.adaptable.app/api/post/comment/${id}`, requestOptions)
         if (!response.ok) {
             console.log("response NOT OK")
             alert("Must be logged in to post a comment")

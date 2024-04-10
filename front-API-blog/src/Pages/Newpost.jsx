@@ -48,7 +48,7 @@ export const Newpost = ({ userAccessToken }) => {
             body: JSON.stringify(formData)
         };
         try {
-            const response = await fetch('http://localhost:3000/api/post', requestOptions)
+            const response = await fetch('https://consoleblog.adaptable.app/api/post', requestOptions)
             const responseBody = await response.json(); // Parse JSON response once
             const msg = responseBody.msg;
             if (response.ok) {

@@ -38,7 +38,7 @@ export const Login = ({setUserAccessToken}) => {
             body: JSON.stringify(formData)
         };
         try {
-            const response = await fetch('http://localhost:3000/api/user/login', requestOptions)
+            const response = await fetch('https://consoleblog.adaptable.app/api/user/login', requestOptions)
             const responseData = await response.json();
             if (response.ok) {
                 localStorage.setItem("UserAccessToken", responseData.accessToken)

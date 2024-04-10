@@ -34,7 +34,7 @@ export const Homepage = () => {
                 }
             };
             setLoadingData(true);
-            const response = await fetch('http://localhost:3000/api/post/all', requestOptions);
+            const response = await fetch('https://consoleblog.adaptable.app/api/post/all', requestOptions);
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }

@@ -56,7 +56,7 @@ export const Signup = () => {
                 },
                 body: JSON.stringify(formData)
             };
-            const response = await fetch('http://localhost:3000/api/user', requestOptions);
+            const response = await fetch('https://consoleblog.adaptable.app/api/user', requestOptions);
             const responseData = await response.json();
             if (!response.ok) {
                 console.log(responseData.msg)
