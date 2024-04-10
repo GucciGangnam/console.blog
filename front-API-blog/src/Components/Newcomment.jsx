@@ -26,6 +26,7 @@ export const Newcomment = ({ userAccessToken, setShowCommentBox, id }) => {
         const response = await fetch(`http://localhost:3000/api/post/comment/${id}`, requestOptions)
         if (!response.ok) {
             console.log("response NOT OK")
+            alert("Must be logged in to post a comment")
         } else {
             console.log("response OK!")
             setShowCommentBox(false)

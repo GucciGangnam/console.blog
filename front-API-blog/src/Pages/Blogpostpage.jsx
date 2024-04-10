@@ -67,13 +67,6 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
     // FN To increment likes
     const handleLike = async () => {
         try {
-            if (userLikedPost) {
-                setUserLikedPost(false);
-                setPostLikesCount(prevPostLikeCount => prevPostLikeCount - 1);
-            } else {
-                setUserLikedPost(true);
-                setPostLikesCount(prevPostLikeCount => prevPostLikeCount + 1);
-            }
             // Post request to http://localhost:3000/api/post/like/POSTID
             const requestOptions = {
                 method: 'POST',
@@ -84,7 +77,17 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
             };
             const response = await fetch(`http://localhost:3000/api/post/like/${id}`, requestOptions);
             if (!response.ok) {
+                alert("you must log in to like a post")
                 throw new Error('Failed to like/unlike the post');
+            }
+            if (response.ok){ 
+                if (userLikedPost) {
+                    setUserLikedPost(false);
+                    setPostLikesCount(prevPostLikeCount => prevPostLikeCount - 1);
+                } else {
+                    setUserLikedPost(true);
+                    setPostLikesCount(prevPostLikeCount => prevPostLikeCount + 1);
+                }
             }
             console.log('Like operation succeeded');
         } catch (error) {
@@ -116,6 +119,10 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
         } catch (err) {
             console.error(err)
         }
+    }
+    // FB to handle EDIT post 
+    const handleEditPost = () => { 
+        console.log("editign post")
     }
     // Handle show comment bopx 
     const handleShowCommentBox = () => {
@@ -168,7 +175,9 @@ export const Blogpostpage = ({ userAccessToken, loggedinUser }) => {
                             </button>
                             <button onClick={handleShowCommentBox}>postComment{'('}{')'}</button>
                             {post.post.AUTHOR_ID === loggedinUser.userId && (
-                                <button onClick={handleDeletePost}>DeletePost</button>
+                                <>
+                                <button onClick={handleDeletePost}>DeletePost{'('}{')'}</button>
+                                </>
                             )}
                         </h3>
                         <h3>Comments:</h3>

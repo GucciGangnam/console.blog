@@ -7,13 +7,23 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Myaccount.css"
 
 // COMPONENT // 
-export const Myaccount = ({ userAccessToken, loggedinUser }) => {
+export const Myaccount = ({ userAccessToken, loggedinUser, setLoggedinUser, setUserAccessToken }) => {
     const navigate = useNavigate();
     // States 
     const [loading, setLoading] = useState(true)
     const [fetchErr, setFetchErr] = useState(false)
     const [fetchErrMsg, setFetchErrMsg] = useState(false)
     const [userData, setUserData] = useState({})
+
+    // Handlers 
+    const handleLogout = () => { 
+        //Remove access topken from broswer 
+        localStorage.removeItem("UserAccessToken");
+        // navigate to home 
+        setLoggedinUser({})
+        setUserAccessToken("")
+        navigate('/');
+    }
 
 
     //UE to fetch request on mount
@@ -90,16 +100,22 @@ export const Myaccount = ({ userAccessToken, loggedinUser }) => {
                     <p className="Post-Loading-Error">Error: {fetchErrMsg}</p>
                 ) : (
                     <div className="Object-grid-container">
-                    <h3>username:</h3><h3>{userData.USERNAME},</h3>
-                    <h3>Firstname:</h3><h3>{userData.FIRSTNAME ? userData.FIRSTNAME : "Anon"},</h3>
-                    <h3>Lastname:</h3><h3>{userData.LASTNAME ? userData.LASTNAME : "Anon"},</h3>
-                    <h3>Email:</h3><h3>{userData.EMAIL},</h3>                  
+                        <h3>username:</h3><h3>{userData.USERNAME},</h3>
+                        <h3>Firstname:</h3><h3>{userData.FIRSTNAME ? userData.FIRSTNAME : "Anon"},</h3>
+                        <h3>Lastname:</h3><h3>{userData.LASTNAME ? userData.LASTNAME : "Anon"},</h3>
+                        <h3>Email:</h3><h3>{userData.EMAIL},</h3>
+                        <h3>Functions:</h3>
+                        <h3>
+                        <button onClick={handleLogout}>
+                            Logout
+                        </button>
+                        </h3>
                     </div>
                 )}
             </div>
             <h1 className="Posts-Header">{'}'}</h1>
         </div>
-        
+
     )
 }
 

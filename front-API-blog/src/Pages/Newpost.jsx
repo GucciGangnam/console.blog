@@ -88,7 +88,7 @@ export const Newpost = ({ userAccessToken }) => {
                         onChange={handleBodyChange}
                         rows={5} // Set the initial number of rows
                         style={{ resize: 'vertical' }} // Allow vertical resizing
-                        maxLength={1000} // Limit to 1000 characters
+                        maxLength={10000} // Limit to 1000 characters
                     />
                 </div>
                 <h1>{'}'}</h1>

@@ -95,7 +95,7 @@ export const Homepage = () => {
                                 <p>{'{'}</p>
                                 <p>&nbsp;Author: {post.AUTHOR_USERNAME}</p>
                                 <p>&nbsp;Posted: {formatDate(post.TIMESTAMP)}</p>
-                                <p>&nbsp;Words: xxx</p>
+                                <p>&nbsp;Words: {post.WORDS}</p>
                                 <p>&nbsp;Likes: {post.LIKES.length}</p>
                                 <p>&nbsp;Comments: {post.COMMENTS.length}</p>
                                 <p>{'}'}</p>

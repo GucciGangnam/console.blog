@@ -1,8 +1,10 @@
 .Blogpostpage {
-    color: white;
+    color: rgb(196, 196, 196);
 }
 
+
 .Object-grid-container {
+
     display: grid;
     grid-template-columns: auto 1fr;
     /* Left column sizes to content, right column fills remaining space */
@@ -11,12 +13,15 @@
 }
 
 .Object-grid-container>* {
+    
     /* Add borders to all grid items */
     padding: 10px;
     /* Optional: Add padding to improve spacing */
+    overflow: scroll;
 }
 
 .Comment-Object-grid-container {
+
     display: grid;
     grid-template-columns: auto 1fr;
     /* Two columns: auto (fit to content) and 1fr (fill remaining space) */

@@ -64,7 +64,7 @@ function App() {
         <Route path="/newpost" element={<Newpost userAccessToken={userAccessToken}/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login setUserAccessToken={setUserAccessToken} />} />
-        <Route path="/account" element={<Myaccount userAccessToken={userAccessToken} />} />
+        <Route path="/account" element={<Myaccount userAccessToken={userAccessToken} setLoggedinUser={setLoggedinUser} setUserAccessToken={setUserAccessToken} />} />
       </Routes>
     </div>
   )

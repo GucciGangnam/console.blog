@@ -18,7 +18,13 @@
 
 }
 
-.Logo {}
+.Logo {
+
+}
+.Logo:hover {
+    cursor: pointer;
+    
+}
 
 .Nav-Header {}
 
