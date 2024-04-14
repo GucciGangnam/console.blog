@@ -14,8 +14,11 @@ The focus of this project was to design and develop my own API linked to a datab
 ## Features
 
 JWTs - Robust and secure API security.
+<br>
 PassportJS - Trusted user authentification.
+<br>
 BcryptJS - Trusted password salting and hashing.
+<br>
 Cors - Api security.
 
 
@@ -24,9 +27,13 @@ Cors - Api security.
 ## Technologies used
 
 -React
+<br>
 -JS
+<br>
 -Css
+<br>
 -NodeJS
+<br>
 -MongoDB
 
 ---
